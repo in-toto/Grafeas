@@ -103,7 +103,7 @@ func (h *Handler) CreateOccurrence(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "can't read body", http.StatusBadRequest)
 		return
 	}
-	k, pID, parseErr := name.ParseResourceKindAndProjectFromPath(strings.Trim(r.URL.Path, "/"))
+	k, _, parseErr := name.ParseResourceKindAndProjectFromPath(strings.Trim(r.URL.Path, "/"))
 	if parseErr != nil {
 		log.Printf("error parsing path %v", parseErr)
 		http.Error(w, "Error processing request", http.StatusInternalServerError)
@@ -114,15 +114,15 @@ func (h *Handler) CreateOccurrence(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error processing request", http.StatusInternalServerError)
 		return
 	}
-
 	json.Unmarshal(body, &o)
 	// Generate random occurrenceId to prevent collisions
-	oID := uuid.New()
-	oName := name.FormatOccurrence(pID, oID.String())
+	//oID := uuid.New()
+	//oName := name.FormatOccurrence(pID, oID.String())
 
 	// We replace the name in the specified occurrence with the name generated, as users shouldn't
 	// specify an occurrence name.
-	o.Name = oName
+    // FIXME: we are using the step name now, so we overwrite it 
+	//o.Name = oName
 	if err := h.g.CreateOccurrence(&o); err != nil {
 		log.Printf("Error creating occurrence: %v", err)
 		http.Error(w, err.Err, err.StatusCode)

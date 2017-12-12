@@ -72,4 +72,7 @@ type Occurrence struct {
 
 	// The name of the operation that created this note.
 	OperationName string `json:"operationName,omitempty"`
+
+    // The link metadata corresponding to this occurrence
+    LinkMetadata LinkMetadata `json:"linkMetadata,omitempty"`
 }

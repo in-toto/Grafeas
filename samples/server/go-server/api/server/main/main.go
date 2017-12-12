@@ -24,6 +24,7 @@ import (
 )
 
 func main() {
+    log.Printf("Starting in-toto modified server...")
 	log.Printf("Server started on port 8080")
 	s := storage.NewMemStore()
 	router := server.NewRouter(v1alpha1.Grafeas{S: s})

@@ -44,6 +44,7 @@ func (g *Grafeas) CreateNote(n *swagger.Note) *errors.AppError {
 
 // CreateOccurrence validates that a note is valid and then creates an occurrence in the backing datastore.
 func (g *Grafeas) CreateOccurrence(o *swagger.Occurrence) *errors.AppError {
+    log.Printf("Should be creating an occurrence now")
 	if o.Name == "" {
 		log.Printf("Invalid occurrence name: %v", o.Name)
 		return &errors.AppError{Err: "Invalid occurrence name", StatusCode: http.StatusBadRequest}
@@ -66,6 +67,7 @@ func (g *Grafeas) CreateOccurrence(o *swagger.Occurrence) *errors.AppError {
 
 // CreateOperation validates that a note is valid and then creates an operation note in the backing datastore.
 func (g *Grafeas) CreateOperation(o *swagger.Operation) *errors.AppError {
+    log.Printf("ayylmao");
 	if o.Name == "" {
 		log.Printf("Invalid occurrence name: %v", o.Name)
 		return &errors.AppError{Err: "Invalid occurrence name", StatusCode: http.StatusBadRequest}
